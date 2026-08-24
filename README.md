@@ -1,5 +1,12 @@
 # Zomato Bangalore Market Analysis — Full Project Documentation
 
+Example Screenshot From PowerBI 
+<img width="1585" height="765" alt="Screenshot 2026-08-24 235530" src="https://github.com/user-attachments/assets/2a0d7b16-eb4f-4a6c-baff-966c3797a2a3" />
+
+<img width="1594" height="770" alt="Screenshot 2026-08-24 235611" src="https://github.com/user-attachments/assets/c6568b5c-e55f-4cc9-93ae-c7e5df822fdd" />
+
+
+
 **Tools:** SQL Server (SSMS 22), Power BI Desktop
 **Dataset:** Zomato Bangalore Restaurants (Kaggle) — 51,717 raw listings
 **Goal:** Analyze the Bangalore restaurant market to help a business owner decide *where* to open, *what cuisine* to serve, and *what price point* to target.
