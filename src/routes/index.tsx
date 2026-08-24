@@ -524,7 +524,7 @@ function OpenSpot() {
     <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-card">
         <div className="mx-auto max-w-5xl px-4 pt-8">
-          <h1 className="text-3xl font-extrabold tracking-tight text-brand sm:text-4xl">OpenSpot</h1>
+          <h1 className="text-3xl font-extrabold tracking-tight text-brand sm:text-4xl">Zomato Business</h1>
           <p className="mt-1 text-sm font-semibold text-muted-foreground">
             Restaurant Market Intelligence — Bangalore
           </p>
