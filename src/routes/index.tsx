@@ -200,7 +200,7 @@ function scores(loc: Loc) {
 function OpportunityFinder() {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState<Loc>(LOCALITIES[0]);
+  const [selected, setSelected] = useState<Loc>(LOCALITIES[0]!);
 
   const filtered = useMemo(
     () => LOCALITIES.filter((l) => l.locality.toLowerCase().includes(query.trim().toLowerCase())),
