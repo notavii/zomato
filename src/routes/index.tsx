@@ -476,7 +476,7 @@ function FeedbackModule({ locality }: { locality: string }) {
   if (done) {
     return (
       <Card className="text-center">
-        <p className="py-6 text-sm font-bold">Thanks — this helps us improve OpenSpot.</p>
+        <p className="py-6 text-sm font-bold">Thanks — this helps us improve Zomato-Business.</p>
       </Card>
     );
   }
@@ -524,7 +524,7 @@ function FeedbackModule({ locality }: { locality: string }) {
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value.slice(0, 255))}
-        placeholder="Get notified when we cover more cities"
+        placeholder="Enter email to get notified about future updates."
         className="mt-3 w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand"
       />
 
