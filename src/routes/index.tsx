@@ -15,13 +15,13 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "OpenSpot — Bangalore Restaurant Market Intelligence" },
+      { title: "Zomato Business — Bangalore Restaurant Market Intelligence" },
       {
         name: "description",
         content:
           "Find where to open, what to serve and what to charge in Bangalore, based on analysis of 51,717 Zomato listings.",
       },
-      { property: "og:title", content: "OpenSpot — Bangalore Restaurant Market Intelligence" },
+      { property: "og:title", content: "Zomato Business — Bangalore Restaurant Market Intelligence" },
       {
         property: "og:description",
         content:
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: OpenSpot,
+  component: ZomatoBusiness,
 });
 
 /* ---------------- data ---------------- */
