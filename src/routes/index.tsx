@@ -517,7 +517,7 @@ function Playbook() {
 
 const TABS = ["Overview", "Opportunity Finder", "Playbook"] as const;
 
-function OpenSpot() {
+function ZomatoBusiness() {
   const [tab, setTab] = useState<(typeof TABS)[number]>("Overview");
 
   return (
