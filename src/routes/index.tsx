@@ -433,7 +433,112 @@ function OpportunityFinder() {
           ))}
         </div>
       </Card>
+
+      <FeedbackModule locality={selected.locality} />
     </div>
+  );
+}
+
+function FeedbackModule({ locality }: { locality: string }) {
+  const [rating, setRating] = useState<"up" | "down" | null>(null);
+  const [comment, setComment] = useState("");
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [done, setDone] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.sessionStorage.getItem("zb-feedback-submitted") === "1";
+  });
+
+  async function submit() {
+    if (submitting || done) return;
+    setSubmitting(true);
+    setError(null);
+    const { error: err } = await supabase.from("feedback").insert({
+      locality_selected: locality,
+      thumbs_rating: rating ?? "up",
+      comment: comment.trim() || null,
+      email: email.trim() || null,
+    });
+    setSubmitting(false);
+    if (err) {
+      setError("Couldn't submit right now. Please try again.");
+      return;
+    }
+    window.sessionStorage.setItem("zb-feedback-submitted", "1");
+    setDone(true);
+  }
+
+  if (done) {
+    return (
+      <Card className="text-center">
+        <p className="py-6 text-sm font-bold">Thanks — this helps us improve OpenSpot.</p>
+      </Card>
+    );
+  }
+
+  return (
+    <Card>
+      <SectionHeader icon={MessageSquare} title="Was this useful for your decision?" />
+      <div className="flex gap-2">
+        <button
+          type="button"
+          onClick={() => setRating("up")}
+          aria-pressed={rating === "up"}
+          className="flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-colors"
+          style={
+            rating === "up"
+              ? { borderColor: "var(--good)", color: "var(--good)", backgroundColor: "color-mix(in oklch, var(--good) 12%, transparent)" }
+              : { borderColor: "var(--border)" }
+          }
+        >
+          <ThumbsUp className="size-4" strokeWidth={1.75} /> Yes
+        </button>
+        <button
+          type="button"
+          onClick={() => setRating("down")}
+          aria-pressed={rating === "down"}
+          className="flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-colors"
+          style={
+            rating === "down"
+              ? { borderColor: "var(--bad)", color: "var(--bad)", backgroundColor: "color-mix(in oklch, var(--bad) 12%, transparent)" }
+              : { borderColor: "var(--border)" }
+          }
+        >
+          <ThumbsDown className="size-4" strokeWidth={1.75} /> No
+        </button>
+      </div>
+
+      <textarea
+        value={comment}
+        onChange={(e) => setComment(e.target.value.slice(0, 1000))}
+        placeholder="What would make this more useful?"
+        rows={3}
+        className="mt-4 w-full resize-none rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand"
+      />
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value.slice(0, 255))}
+        placeholder="Get notified when we cover more cities"
+        className="mt-3 w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand"
+      />
+
+      {error ? (
+        <p className="mt-3 text-sm font-medium" style={{ color: "var(--bad)" }}>
+          {error}
+        </p>
+      ) : null}
+
+      <button
+        type="button"
+        onClick={submit}
+        disabled={submitting}
+        className="mt-4 rounded-lg bg-brand px-5 py-2.5 text-sm font-bold text-white disabled:opacity-60"
+      >
+        {submitting ? "Submitting…" : "Submit"}
+      </button>
+    </Card>
   );
 }
 
